@@ -1,0 +1,22 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}
+	{% trans %}Check for open port{% endtrans %}
+{% endblock %}
+
+{% block content %}
+	<h1>{{ block("title") }}</h1>
+
+	{% if message %}
+		<div class="card border-{% if success %}success{% else %}danger{% endif %} mb-3">
+			<div class="card-header bg-{% if success %}success{% else %}danger{% endif %}">Status</div>
+			<div class="card-body">
+				<p class="card-text">{{ message }}</p>
+			</div>
+		</div>
+	{% endif %}
+
+	{{ form_start(form) }}
+	{{ form_widget(form) }}
+	{{ form_end(form) }}
+{% endblock %}

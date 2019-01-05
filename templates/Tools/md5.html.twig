@@ -1,0 +1,22 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}
+	{% trans %}MD5 Converter{% endtrans %}
+{% endblock %}
+
+{% block content %}
+	<h1>{{ block("title") }}</h1>
+
+	{% if result %}
+		<div class="card border-success mb-3">
+			<div class="card-header bg-success">MD5 Hash</div>
+			<div class="card-body">
+				<p class="card-text">{{ result }}</p>
+			</div>
+		</div>
+	{% endif %}
+
+	{{ form_start(form) }}
+	{{ form_widget(form) }}
+	{{ form_end(form) }}
+{% endblock %}
