@@ -6,8 +6,8 @@
 
 {% block content %}
 	<h1>{{ block("title") }}</h1>
-	<div class="row">
-		<div class="col-md-6">
+	<div class="row mb-2">
+		<div class="col-md-12 mb-2">
 			<div class="card">
 				<div class="card-header">IP address</div>
 				<div class="card-body">
@@ -15,11 +15,60 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-6">
+	</div>
+	<div class="row">
+		<div class="col-md-12">
 			<div class="card">
-				<div class="card-header">Timestamp {{ "now"|date("d.m.Y H:i:s") }}</div>
+				<div class="card-header">
+					Date: <span id="showDateDay">{{ "now"|date("d") }}</span>.<span id="showDateMonth">{{ "now"|date("m") }}</span>.<span id="showDateYear">{{ "now"|date("Y") }}</span> <span id="showDateHour">{{ "now"|date("H") }}</span>:<span id="showDateMinute">{{ "now"|date("i") }}</span>:<span id="showDateSecond">{{ "now"|date("s") }}</span>
+				</div>
 				<div class="card-body">
-					<p class="card-text">{{ "now"|date("U") }}</p>
+					<div class="row">
+						<div class="col-md-2"><label for="dateTimestamp">Timestamp:</label></div>
+						<div class="col-md-4">
+							<span id="showDateTimestamp"></span>
+						</div>
+						<div class="col-md-2"><label for="dateTimestamp">Timestamp UTC:</label></div>
+						<div class="col-md-4">
+							<span id="showDateUtcTimestamp"></span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2"><label for="dateDay">Day:</label></div>
+						<div class="col-md-10">
+							<input type="range" id="dateDay" class="form-control-range" min="1" max="31" value="{{ "now"|date("j") }}">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2"><label for="dateMonth">Month:</label></div>
+						<div class="col-md-10">
+							<input type="range" id="dateMonth" class="form-control-range" min="1" max="12" value="{{ "now"|date("n") }}">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2"><label for="dateYear">Year:</label></div>
+						<div class="col-md-10">
+							<input type="range" id="dateYear" class="form-control-range" min="1970" max="2040" value="{{ "now"|date("Y") }}">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2"><label for="dateHour">Hour:</label></div>
+						<div class="col-md-10">
+							<input type="range" id="dateHour" class="form-control-range" min="0" max="23" value="{{ "now"|date("G") }}">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2"><label for="dateMinute">Minute:</label></div>
+						<div class="col-md-10">
+							<input type="range" id="dateMinute" class="form-control-range" min="0" max="59" value="{{ "now"|date("i")|trim('0', 'left') }}">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2"><label for="dateSecond">Second:</label></div>
+						<div class="col-md-10">
+							<input type="range" id="dateSecond" class="form-control-range" min="0" max="59" value="{{ "now"|date("s")|trim('0', 'left') }}">
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
