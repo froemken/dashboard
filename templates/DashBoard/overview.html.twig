@@ -7,11 +7,27 @@
 {% block content %}
 	<h1>{{ block("title") }}</h1>
 	<div class="row mb-2">
-		<div class="col-md-12 mb-2">
+		<div class="col-md-6 mb-2">
 			<div class="card">
 				<div class="card-header">IP address</div>
 				<div class="card-body">
 					<p class="card-text">{{ ipAddress }}</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 mb-2">
+			<div class="card">
+				<div class="card-header">Timestamp converter</div>
+				<div class="card-body">
+					<form action="#" class="form-inline">
+						<div class="form-group">
+							<input type="text" id="dateTimestamp" class="form-control" value="{{ "now"|date("U") }}" />
+							<div class="input-group-append">
+								<button type="submit" class="btn btn-primary">Convert</button>
+							</div>
+						</div>
+					</form>
+					<div><code>{{ "now"|date("d.m.Y H:i:s") }}</code></div>
 				</div>
 			</div>
 		</div>

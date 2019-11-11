@@ -12,80 +12,79 @@ require('../css/app.scss');
 const $ = require('jquery');
 require('bootstrap');
 
-// Sliders for date
-let sliderDateDay = document.getElementById("dateDay");
-let sliderDateMonth = document.getElementById("dateMonth");
-let sliderDateYear = document.getElementById("dateYear");
-let sliderDateHour = document.getElementById("dateHour");
-let sliderDateMinute = document.getElementById("dateMinute");
-let sliderDateSecond = document.getElementById("dateSecond");
+function TimeConverter() {
+    let me = this;
+    me.sliderDateDay = document.getElementById("dateDay");
+    me.sliderDateMonth = document.getElementById("dateMonth");
+    me.sliderDateYear = document.getElementById("dateYear");
+    me.sliderDateHour = document.getElementById("dateHour");
+    me.sliderDateMinute = document.getElementById("dateMinute");
+    me.sliderDateSecond = document.getElementById("dateSecond");
+    me.showDateTimestamp = document.getElementById("showDateTimestamp");
+    me.showDateUtcTimestamp = document.getElementById("showDateUtcTimestamp");
+    me.showDateDay = document.getElementById("showDateDay");
+    me.showDateMonth = document.getElementById("showDateMonth");
+    me.showDateYear = document.getElementById("showDateYear");
+    me.showDateHour = document.getElementById("showDateHour");
+    me.showDateMinute = document.getElementById("showDateMinute");
+    me.showDateSecond = document.getElementById("showDateSecond");
 
-let showDateTimestamp = document.getElementById("showDateTimestamp");
-let showDateUtcTimestamp = document.getElementById("showDateUtcTimestamp");
-let showDateDay = document.getElementById("showDateDay");
-let showDateMonth = document.getElementById("showDateMonth");
-let showDateYear = document.getElementById("showDateYear");
-let showDateHour = document.getElementById("showDateHour");
-let showDateMinute = document.getElementById("showDateMinute");
-let showDateSecond = document.getElementById("showDateSecond");
+    me.initialize = function () {
+        this.activateEventHandlers();
+    };
 
-showDateDay.innerHTML = getFormattedDateValue(sliderDateDay.value, 2);
-showDateMonth.innerHTML = getFormattedDateValue(sliderDateMonth.value, 2);
-showDateYear.innerHTML = sliderDateYear.value;
-showDateHour.innerHTML = getFormattedDateValue(sliderDateHour.value, 2);
-showDateMinute.innerHTML = getFormattedDateValue(sliderDateMinute.value, 2);
-showDateSecond.innerHTML = getFormattedDateValue(sliderDateSecond.value, 2);
-updateDateTimestamp();
+    me.activateEventHandlers = function () {
+        this.activateEventHandler(this.sliderDateDay, this.showDateDay, 2);
+        this.activateEventHandler(this.sliderDateMonth, this.showDateMonth, 2);
+        this.activateEventHandler(this.sliderDateYear, this.showDateYear, 4);
+        this.activateEventHandler(this.sliderDateHour, this.showDateHour, 2);
+        this.activateEventHandler(this.sliderDateMinute, this.showDateMinute, 2);
+        this.activateEventHandler(this.sliderDateSecond, this.showDateSecond, 2);
+    };
 
-sliderDateDay.oninput = function() {
-    showDateDay.innerHTML = getFormattedDateValue(this.value, 2);
-    updateDateTimestamp();
-};
-sliderDateMonth.oninput = function() {
-    showDateMonth.innerHTML = getFormattedDateValue(this.value, 2);
-    updateDateTimestamp();
-};
-sliderDateYear.oninput = function() {
-    showDateYear.innerHTML = this.value;
-    updateDateTimestamp();
-};
-sliderDateHour.oninput = function() {
-    showDateHour.innerHTML = getFormattedDateValue(this.value, 2);
-    updateDateTimestamp();
-};
-sliderDateMinute.oninput = function() {
-    showDateMinute.innerHTML = getFormattedDateValue(this.value, 2);
-    updateDateTimestamp();
-};
-sliderDateSecond.oninput = function() {
-    showDateSecond.innerHTML = getFormattedDateValue(this.value, 2);
-    updateDateTimestamp();
-};
+    me.activateEventHandler = function (sliderElement, updateElement, padLength) {
+        sliderElement.oninput = function() {
+            updateElement.innerHTML = me.getFormattedDateValue(this.value, padLength);
+            me.updateDateTimestamp();
+        };
+    };
 
-function getFormattedDateValue(value, padLength, padValue) {
-    return Array(padLength-String(value).length + 1).join(padValue||'0') + value;
+    me.getFormattedDateValue = function (value, padLength, padValue) {
+        return Array(padLength-String(value).length + 1).join(padValue||'0') + value;
+    };
+
+    me.updateDateTimestamp = function () {
+        this.showDateTimestamp.innerHTML = Math.round(
+            new Date(
+                this.sliderDateYear.value,
+                this.sliderDateMonth.value - 1,
+                this.sliderDateDay.value,
+                this.sliderDateHour.value,
+                this.sliderDateMinute.value,
+                this.sliderDateSecond.value
+            ).getTime() / 1000
+        );
+
+        this.showDateUtcTimestamp.innerHTML = Math.round(
+            new Date(Date.UTC(
+                this.sliderDateYear.value,
+                this.sliderDateMonth.value - 1,
+                this.sliderDateDay.value,
+                this.sliderDateHour.value,
+                this.sliderDateMinute.value,
+                this.sliderDateSecond.value
+            )).getTime() / 1000
+        );
+    };
+
+    me.initialize();
+    me.showDateDay.innerHTML = me.getFormattedDateValue(me.sliderDateDay.value, 2);
+    me.showDateMonth.innerHTML = me.getFormattedDateValue(me.sliderDateMonth.value, 2);
+    me.showDateYear.innerHTML = me.getFormattedDateValue(me.sliderDateYear.value, 4);
+    me.showDateHour.innerHTML = me.getFormattedDateValue(me.sliderDateHour.value, 2);
+    me.showDateMinute.innerHTML = me.getFormattedDateValue(me.sliderDateMinute.value, 2);
+    me.showDateSecond.innerHTML = me.getFormattedDateValue(me.sliderDateSecond.value, 2);
+    me.updateDateTimestamp();
 }
 
-function updateDateTimestamp() {
-    showDateTimestamp.innerHTML = Math.round(
-        new Date(
-            sliderDateYear.value,
-            sliderDateMonth.value - 1,
-            sliderDateDay.value,
-            sliderDateHour.value,
-            sliderDateMinute.value,
-            sliderDateSecond.value
-        ).getTime() / 1000
-    );
-
-    showDateUtcTimestamp.innerHTML = Math.round(
-        new Date(Date.UTC(
-            sliderDateYear.value,
-            sliderDateMonth.value - 1,
-            sliderDateDay.value,
-            sliderDateHour.value,
-            sliderDateMinute.value,
-            sliderDateSecond.value
-        )).getTime() / 1000
-    );
-}
+new TimeConverter();
