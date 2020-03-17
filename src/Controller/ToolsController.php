@@ -43,4 +43,15 @@ class ToolsController extends AbstractController
             'result' => $result
         ]);
     }
+
+    /**
+     * @Route("/tools/timestamp", name="timestamp")
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function timestampAction(Request $request)
+    {
+        return $this->render('Tools/timestamp.html.twig', []);
+    }
 }
