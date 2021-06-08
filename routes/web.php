@@ -17,6 +17,6 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::get('/', [\App\Http\Controllers\DashBoardController::class, 'index']);
+Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index']);
 Route::post('/network/dns', [\App\Http\Controllers\NetworkController::class, 'dns']);
 
