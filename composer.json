@@ -1,9 +1,22 @@
 {
-    "name": "laravel/laravel",
+    "name": "stefanfroemken/dashboard",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "A very small PHP Dashboard for my daily work.",
+    "keywords": ["dashboard"],
     "license": "MIT",
+    "homepage": "https://www.typo3lexikon.de",
+    "authors": [
+        {
+            "name": "Stefan Froemken",
+            "email": "froemken@gmail.com",
+            "role": "Lead Developer"
+        }
+    ],
+    "support": {
+        "email": "froemken@gmail.com",
+        "issues": "https://github.com/froemken/dashboard/issues",
+        "source": "https://github.com/froemken/dashboard"
+    },
     "require": {
         "php": "^7.3|^8.0",
         "fideloper/proxy": "^4.4",
