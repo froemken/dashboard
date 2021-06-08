@@ -14,4 +14,5 @@ It's not possible to add your own widgets. Everything here is hard-coded.
 
 ## License
 
-GPL 2.0 or later
+This Dashboard project is open-sourced software licensed under
+the [MIT license](https://opensource.org/licenses/MIT).
